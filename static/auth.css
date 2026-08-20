@@ -1,0 +1,230 @@
+/*
+   LOGIN & REGISTER CSS
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #110d2f, #250467);
+    padding: 20px;
+}
+
+/* Main Container */
+.container {
+    width: 100%;
+    max-width: 500px;
+    background: #fff;
+    padding: 45px 40px;
+    border-radius: 25px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+/* Logo */
+.logo {
+    font-size: 38px;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.logo span {
+    color: #020c1c;
+}
+
+/* Subtitle */
+.subtitle {
+    color: #64748b;
+    font-size: 15px;
+    margin-bottom: 35px;
+}
+
+/* Heading */
+h2 {
+    font-size: 38px;
+    color: #1e293b;
+    margin-bottom: 12px;
+}
+
+.heading-text {
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+/* Form */
+form {
+    width: 100%;
+}
+
+/* Input Box */
+.input-box {
+    margin-bottom: 20px;
+    text-align: left;
+    position: relative;
+}
+
+/* Label */
+.input-box label {
+    display: block;
+    margin-bottom: 8px;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Input */
+.input-box input {
+    width: 100%;
+    height: 55px;
+    border: 1px solid #dbe2ea;
+    border-radius: 12px;
+    padding: 0 50px 0 15px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-box input:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.10);
+}
+
+/* Placeholder */
+.input-box input::placeholder {
+    color: #94a3b8;
+}
+
+/* Password Show Button */
+.input-box button {
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+    background: none;
+    border: none;
+    color: #4f46e5;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Forgot Password */
+.forgot {
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 25px;
+}
+
+.forgot a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.forgot a:hover {
+    text-decoration: underline;
+}
+
+/* Login/Register Button */
+form>button[type="submit"] {
+    width: 100%;
+    height: 55px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #5b4cf2, #2f80ed);
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.25);
+}
+
+form>button[type="submit"]:hover {
+    transform: translateY(-3px);
+}
+
+/* Bottom Text */
+.bottom-text {
+    margin-top: 30px;
+    color: #64748b;
+    font-size: 15px;
+}
+
+.bottom-text a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.bottom-text a:hover {
+    text-decoration: underline;
+}
+
+/* Divider (Google Login) */
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e2e8f0;
+}
+
+.divider span {
+    padding: 0 15px;
+}
+
+/* Google Button */
+.google-btn {
+    width: 100%;
+    height: 55px;
+    background: #fff;
+    border: 1px solid #dbe2ea;
+    border-radius: 12px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.google-btn:hover {
+    background: #f8fafc;
+}
+
+/* Responsive */
+@media(max-width:600px) {
+
+    .container {
+        padding: 35px 25px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    .logo {
+        font-size: 32px;
+    }
+}
+.error{
+    display:block;
+    color:red;
+    font-size: 13px;
+    margin-top: 5px;
+}

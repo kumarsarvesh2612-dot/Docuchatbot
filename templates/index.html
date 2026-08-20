@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>DocuChatbot</title>
+   <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+
+<body>
+   <div class="container">
+      <header class="header">
+         <div class="brand">
+            <div>
+               <h1>Docu<span>ChatBot</span></h1>
+               <p>Chat with your documents using AI</p>
+            </div>
+         </div>
+         <a href="/feedback" class="feedback-btn">Feedback"</a>
+         </div>
+      </header>
+      <div class="dashboard">
+         <div class="card">
+            <h2>API Key</h2>
+            <p>Enter your Google API Key to continue</p>
+            <form method="POST" enctype="multipart/form-data">
+               <button type="button" onclick="toggleApiKey()">Enter API Key</button>
+               <div id="apiKeyBox" style=" margin-top:10px; display:none;">
+                  <input type="password" name="api_key" placeholder="Enter API KEY">
+                  <button type="submit" name="api_key" value="save-apiS">Save API Key</button>
+               </div>
+            </form>
+         </div>
+
+         <div class="card">
+            <h2>Upload PDFs</h2>
+            <p>Upload your PDF document</p>
+            <form method="POST" enctype="multipart/form-data">
+               <input type="file" name="files" multiple accept=".pdf">
+               <br><br>
+               <button type="submit" name="action" value="upload">Upload PDF</button>
+            </form>
+         </div>
+         <div class="card">
+            <h2> Ask Question </h2>
+            <p>Ask anything about your PDF</p>
+            <form method="POST">
+               <input type="text" name="question" placeholder="Question:" required>
+               <button type="submit" name="action" value="ask">Ask</button>
+            </form>
+         </div>
+
+         <div class="card small-card">
+            <h2>Summarize</h2>
+            <p>Get a summary of your PDF</p>
+            <form method="POST">
+               <input type="hidden" name="action" value="summarize">
+               <button name="submit" name="action" value="summarize">Summarize</button>
+            </form>
+         </div>
+
+         <div class="card image-card">
+            <h2>Generate image</h2>
+            <form method="POST">
+               <input type="text" name="image_prompt" placeholder="Enter prompt">
+               <button type="submit" name="action" value="generate">Generate</button>
+            </form>
+         </div>
+
+         <script>
+            function toggleApiKey() {
+               var box = document.getElementById("apiKeyBox");
+               if (box.style.display == "none") {
+                  box.style.display = "block";
+               }
+               else {
+                  box.style.display = "none";
+               }
+            }
+         </script>
+
+         <div class="card answer-card">
+            <h2>Answer</h2>
+            <div class="answer-box">
+               {% if answer %}
+               <p id="aiAnswer">{{answer}}</p>
+               <button type="button" id="readAnswerBin" onclick="toggleAnswerReading()">Read Answer</button>
+               {% else %}
+
+               <div class="empty-answer">
+                  <div class="chat-icon"></div>
+                  <h3>Your answer will appear here...</h3>
+                  <p>Upload a PDF and ask a question to get started!</p>
+               </div>
+               {% endif %}
+            </div>
+         </div>
+
+         {% if summary %}
+         <div class="card output-card">
+            <h2>Summary</h2>
+            <div class="output-box">
+               <p id="aiSummary">{{summary}}</p>
+               <button type="button" id="readSummaryBin" onclick="toggleSummaryReading()">Read Summary</button>
+            </div>
+         </div>
+         {% endif %}
+
+         {% if image %}
+         <div class="card output-card">
+            <h2>Generated Image</h2>
+            <div class="output-box">
+               {{ image }}
+            </div>
+         </div>
+         {% endif %}
+      </div>
+
+      <footer>
+         @2026
+         <strong>DocuChatBot</strong>
+         Built with Heart using Flask,LangChain & Gemini AI
+      </footer>
+   </div>
+
+   <script>
+      let answerSpeech = null;
+      function toggleAnswerReading() {
+         const answer = document.getElementById("aiAnswer");
+         const button = document.getElementById("readAnswerBin");
+         if (!answer) {
+            return;
+         }
+         if (speechSynthesis.speaking) {
+            speechSynthesis.cancel();
+            button.innerHTML = "Read Answer";
+            return
+         }
+         const text = answer.innerText.trim();
+         if (!text) {
+            return;
+         }
+         answerSpeech = new SpeechSynthesisUtterance(text);
+         answerSpeech.lang = "en-US";
+         answerSpeech.rate = 0.7;
+         answerSpeech.pitch = 1;
+         answerSpeech.onstart = function () {
+            button.innerHTML = "Stop";
+         };
+         answerSpeech.onend = function () {
+            button.innerHTML = "Read Answer";
+         };
+         answerSpeech.onerror = function () {
+            button.innerHTML = "Read Answer";
+         };
+         speechSynthesis.speak(answerSpeech);
+      }
+
+      function toggleSummaryReading() {
+         const summary = document.getElementById("aiSummary");
+         const button = document.getElementById("readSummaryBin");
+         if (!summary || !button) {
+            return;
+         }
+         if (window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+            button.innerHTML = "Read Summary";
+            return;
+         }
+         const text = summary.innerText.trim();
+         if (!text) {
+            alert("No summary available");
+            return;
+         }
+         const speech = new SpeechSynthesisUtterance(text);
+         answerSpeech.lang = "en-US"
+         speech.volume = 1.0;
+         speech.rate = 0.7;
+         speech.pitch = 1;
+         button.innerText = "Read Summary";
+         speech.onend = function () {
+            button.innerHTML = "Read Summary";
+         };
+         window.speechSynthesis.speak(speech);
+      }
+   </script>
+</body>
+
+</html>

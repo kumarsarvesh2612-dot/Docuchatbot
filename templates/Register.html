@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>DocuChat-Register</title>
+   <link rel="stylesheet" href="{{ url_for('static',filename='auth.css') }}">
+</head>
+</head>
+
+<body>
+   <div class="container">
+      <div class="logo">DocuChat</div>
+      <p class="subtitle">AI-Power Document Assistant</p>
+      <h2>Create Account</h2>
+      <form action="/register" method="POST">
+         <div class="input-box">
+            <label>Full Name</label>
+            <input type="text" name="name" placeholder="Enter your name" required>
+         </div>
+         <div class="input-box">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+         </div>
+         <div class="input-box">
+            <label>Password</label>
+            <input type="password" id="password" name="password" placeholder="Create a password" required>
+            <button type="button" onclick="showPassword()">show</button>
+            <script>
+               function showPassword() {
+                  let password = document.getElementById("password");
+                  if (password.type === "password") {
+                     password.type = "text";
+                  }
+                  else {
+                     password.type = "password";
+                  }
+               }
+            </script>
+         </div>
+         <div class="input-box">
+            <label>Corfirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your Password"
+               required>
+            <button type="button" onclick="showConfirmPassword()">show</button>
+            <script>
+               function showConfirmPassword() {
+                  let password = document.getElementById("confirm_password");
+                  if (password.type === "password") {
+                     password.type = "text";
+                  }
+                  else {
+                     password.type = "password";
+                  }
+               }
+            </script>
+         </div>
+         <button type="submit">Create Account</button>
+      </form>
+      <p class="bottom-text">Already have an account? <a href="/login">Login</a></p>
+
+   </div>
+</body>
+
+</html>

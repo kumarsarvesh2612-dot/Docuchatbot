@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Feedback- DocuchatBot</title>
+
+   <style>
+      <style>* {
+         box-sizing: border-box;
+      }
+
+      body {
+         margin: 0;
+         min-height: 100vh;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         padding: 20px;
+         background: #06122d;
+         color: #ffffff;
+         font-family: Arial, sans-serif;
+      }
+
+      .feedback-card {
+         width: 100%;
+         max-width: 650px;
+         padding: 35px;
+         border-radius: 18px;
+         background: #101f42;
+         border: 1px solid #263d6b;
+         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      .feedback-card h1 {
+         margin: 0 0 10px;
+         color: #ffffff;
+         font-size: 32px;
+      }
+
+      .feedback-card p {
+         margin-bottom: 20px;
+         color: #b8c5df;
+         font-size: 16px;
+      }
+
+      .feedback-card textarea {
+         display: block;
+         width: 100%;
+         height: 160px;
+         padding: 16px;
+         margin: 0;
+
+         background: #0b1835;
+         color: #ffffff;
+
+         border: 1px solid #344d7c;
+         border-radius: 12px;
+
+         outline: none;
+         resize: vertical;
+         font-family: Arial, sans-serif;
+         font-size: 16px;
+      }
+
+      .feedback-card textarea::placeholder {
+         color: #8492b2;
+         opacity: 1;
+      }
+
+      .feedback-card textarea:focus {
+         border-color: #6d5dfc;
+         box-shadow: 0 0 0 3px rgba(109, 93, 252, 0.15);
+      }
+
+      .feedback-card button {
+         display: block;
+         width: 100%;
+         height: 52px;
+         margin-top: 20px;
+         padding: 14px;
+
+         border: none;
+         border-radius: 10px;
+
+         background: linear-gradient(90deg,
+               #7c3aed,
+               #2563eb);
+
+         color: #ffffff;
+         font-size: 16px;
+         font-weight: bold;
+         cursor: pointer;
+
+         transition: 0.3s;
+      }
+
+      .feedback-card button:hover {
+         transform: translateY(-2px);
+         box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+      }
+
+      @media (max-width: 600px) {
+         .feedback-card {
+            padding: 25px 20px;
+         }
+
+         .feedback-card h1 {
+            font-size: 26px;
+         }
+      }
+   </style>
+   </style>
+</head>
+
+<body>
+   <div class="feedback-card">
+      <h1>Feedback</h1>
+      <p>Help us improve DocuChatBot</p>
+      <form method="POST" action="/feedback">
+         <textarea name="feedback" placeholder="Write your feedback here..." required></textarea>
+         <button type="submit">Submit Feedback</button>
+         {% if success %}
+         <div class="success-message">
+            {{ success }}
+         </div>
+         {% endif %}
+      </form>
+   </div>
+</body>
+
+</html>
