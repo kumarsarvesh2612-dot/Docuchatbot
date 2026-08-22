@@ -20,13 +20,21 @@ from flask import ( Flask, render_template,request,session,redirect,url_for)
 user_api_key= os.getenv("GOOGLE_API_KEY")
 app = Flask(__name__)
 def get_db_connection():
-    return mysql.connector.connect(
-        host=os.getenv("MYSQL_PORT"),
-        user=os.getenv("MYSQL_USER"),
-        password=os.getenv("MYSQL_PASSWORD"),
-        database=os.getenv("MYSQL_DATABASE"),
-        port=int(os.getenv("MYSQL_PORT","3306"))
-    )
+    try:
+        port = os.getenv("MYSQL_PORT") or os.getenv("MYSQLPORT") or "3306"
+        port = int(port) if str(port).strip() != "" else 3306
+        
+        conn = mysql.connector.connect(
+            host=os.getenv("MYSQL_HOST") or os.getenv("MYSQLHOST"),
+            port=port,
+            user=os.getenv("MYSQL_USER") or os.getenv("MYSQLUSER"),
+            password=os.getenv("MYSQL_PASSWORD") or os.getenv("MYSQL_ROOT_PASSWORD") or os.getenv("MYSQLPASSWORD"),
+            database=os.getenv("MYSQL_DATABASE") or os.getenv("MYSQLDATABASE")
+        )
+        return conn
+    except Exception as e:
+        print(f"Feedback error: {e}")
+        return None
 app.secret_key="mysecret123"
 answer=""
 summary=""
